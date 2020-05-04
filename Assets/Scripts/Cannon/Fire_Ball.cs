@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shoot : MonoBehaviour
+public class Fire_Ball : MonoBehaviour
 {
 
     // Start is called before the first frame update
@@ -17,10 +17,13 @@ public class Shoot : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * 3);
     }
 
-    private void OnMouseDown()
+    private void OnCollisionEnter(Collision collision)
     {
-
-        //GetComponent<Rigidbody>().AddForce(transform.forward * 500);
+        if (collision.collider.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+            //KillPlayer();
+        }
 
     }
 }
