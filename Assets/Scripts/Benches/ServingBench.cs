@@ -8,7 +8,7 @@ public class ServingBench : Countertop
     {
         if (a_player.IsHoldingDish())
         {
-            GameManager.instance.ServeDish(1.0f);
+            GameManager.instance.ServeDish();
             a_player.DiscardHeldItem();
         }
     }
