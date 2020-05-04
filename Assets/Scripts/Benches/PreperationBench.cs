@@ -12,7 +12,6 @@ public class PreperationBench : Countertop
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GameManager.instance.playerController;
     }
 
     // Update is called once per frame
@@ -23,13 +22,14 @@ public class PreperationBench : Countertop
 
     public override void Interact(PlayerController a_player)
     {
+        playerController = a_player;
+
         // Check if player is holding ingredient
         if (playerController.IsHoldingIngredient())
         {
             // Check if player is holding desired ingredient
             if (ContainsIngredientByName(remainingIngredients, playerController.GetHeldItem().GetComponent<Ingredient>().ingredientName))
             {
-                Debug.Log("Ingredient is desired");
                 // If so, take ingredient and remove from 'remainingIngredients'
                 RemoveIngredientByName(remainingIngredients, playerController.GetHeldItem().GetComponent<Ingredient>().ingredientName);
                 playerController.DiscardHeldItem();
@@ -41,10 +41,6 @@ public class PreperationBench : Countertop
                     CompleteAndPickupDish();
                 }
 
-            }
-            else
-            {
-                Debug.Log("Ingredient not desired");
             }
         }
     }

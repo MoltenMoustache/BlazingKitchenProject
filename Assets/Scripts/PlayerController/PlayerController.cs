@@ -32,6 +32,13 @@ public class PlayerController : MonoBehaviour
         HandleHighlight();
 
         HandleInteraction();
+
+
+
+        #region Debug
+        if (Input.GetKeyDown(KeyCode.K))
+            KillPlayer();
+        #endregion
     }
 
     void FixedUpdate()
@@ -112,10 +119,31 @@ public class PlayerController : MonoBehaviour
     }
     public bool IsHoldingIngredient()
     {
-        return heldItem.GetComponent<Ingredient>() != null;
+        if (IsHoldingItem())
+            return heldItem.GetComponent<Ingredient>() != null;
+        else return false;
     }
     public bool IsHoldingDish()
     {
-        return heldItem.GetComponent<DishObject>() != null;
+        if (IsHoldingItem())
+            return heldItem.GetComponent<DishObject>() != null;
+        else return false;
+    }
+
+    public void KillPlayer()
+    {
+        DiscardHeldItem();
+        GameManager.instance.KillPlayer();
+        gameObject.SetActive(false);
+    }
+
+    public void RespawnPlayer(Vector3 a_respawnPos)
+    {
+        Debug.Log("Respawned!");
+        gameObject.SetActive(true);
+
+        characterController.enabled = false;
+        transform.position = a_respawnPos;
+        characterController.enabled = true;
     }
 }

@@ -15,8 +15,7 @@ public class GameManager : MonoBehaviour
 
     // References
     public PlayerController playerController;
-    string discordWebhookURL = "https://discordapp.com/api/webhooks/706712743100809288/oCQfgBBKFGgBuStZVPQ1bcJMe7P9lsIHexoBFpeVK4KBrBE_oQ5Qn3tuFQ49224n1dir";
-
+    UIManager uiManager;
 
     [Header("Score")]
     [SerializeField] float totalGameTime;
@@ -25,43 +24,83 @@ public class GameManager : MonoBehaviour
 
     [Header("Dishes")]
     [SerializeField] List<Dish> dishes = new List<Dish>();
+    [SerializeField] float orderTimeout = 10.0f;
     Dish activeDish = null;
+    Timer dishTimer = null;
 
     [Header("Benches")]
     [SerializeField] List<PreperationBench> prepBenches = new List<PreperationBench>();
+
+    [Header("Respawning")]
+    [SerializeField] float respawnTime = 5.0f;
+    Timer respawnTimer = null;
+    [SerializeField] Transform respawnPoint = null;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        uiManager = GetComponent<UIManager>();
+
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         SelectNextDish();
 
         timer = new Timer(totalGameTime, EndGame);
+        uiManager.SetMaxGameTime(totalGameTime);
     }
 
     // Update is called once per frame
     void Update()
     {
         timer.Tick(Time.deltaTime);
+        uiManager.SetCurrentGameTime(timer.CurrentTimer);
+
+        if (respawnTimer != null)
+            respawnTimer.Tick(Time.deltaTime);
     }
 
+    #region Respawn
+    public void KillPlayer()
+    {
+        respawnTimer = new Timer(respawnTime, RespawnPlayer);
+    }
+
+    void RespawnPlayer()
+    {
+        playerController.RespawnPlayer(respawnPoint.position);
+    }
+    #endregion Respawn
+
+    #region Dishes
     void SelectNextDish()
     {
         activeDish = dishes[Random.Range(0, dishes.Count)];
-        Debug.Log("Active Dish: " + activeDish.dishName);
-        // Tell PrepBenches (delegate?)
+
+        if (dishTimer == null)
+            dishTimer = new Timer(orderTimeout, OrderTimeout);
+        else
+            dishTimer.Reset(orderTimeout);
+
         // TEMPORARY
         for (int i = 0; i < prepBenches.Count; i++)
         {
             prepBenches[i].SelectActiveDish(activeDish);
         }
+
+
         // Tell UI
+        uiManager.SetActiveDish(activeDish);
     }
 
-    public void ServeDish(float a_timeRemaining)
+    void OrderTimeout()
     {
-        float score = a_timeRemaining / 3.0f;
+        currentScore -= 1;
+        SelectNextDish();
+    }
+
+    public void ServeDish()
+    {
+        float score = dishTimer.CurrentTimer / 3.0f;
         if (score < 1.0f)
             score = 1.0f;
 
@@ -74,34 +113,12 @@ public class GameManager : MonoBehaviour
     {
         return activeDish;
     }
+    #endregion
 
     void EndGame()
     {
         Debug.Log("Game Over with a score of: " + currentScore);
 
-        Embed embed = new Embed
-        {
-            Title = "Blazing Kitchen Project",
-            Color = 14177041,
-            Description = "I scored " + currentScore.ToString() + "!",
-            Footer = new EmbedFooter
-            {
-                Text = "It was tough"
-
-            }
-        };
-
-        StartCoroutine(SendEmbed(embed));
+        uiManager.EndGame((int)currentScore);
     }
-    #region DiscordWebhook
-    IEnumerator SendEmbed(Embed a_embed)
-    {
-        Webhook webhook = new Webhook(discordWebhookURL);
-        List<Embed> embeds = new List<Embed>();
-        embeds.Add(a_embed);
-
-
-        yield return webhook.Send(string.Empty, "Blazing Kitchen Project", "https://cdn.discordapp.com/attachments/706667975171768330/706714712175411250/icon.png", false, embeds);
-    }
-    #endregion
 }
