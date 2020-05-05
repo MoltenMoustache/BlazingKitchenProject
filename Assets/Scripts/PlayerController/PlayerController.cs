@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float movementSpeed;
     [SerializeField] Vector3 gravity;
+    Vector3 forwardVector;
+    Vector3 rightVector;
 
     [Header("Items")]
     [SerializeField] Transform heldItemPos;
@@ -24,6 +26,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+
+        Vector3 camRotation = Camera.main.transform.rotation.eulerAngles;
+        Camera.main.transform.rotation = Quaternion.Euler(Vector3.zero);
+        forwardVector = Camera.main.transform.forward;
+        rightVector = Camera.main.transform.right;
+        Camera.main.transform.rotation = Quaternion.Euler(camRotation);
     }
 
     // Update is called once per frame
@@ -52,9 +60,11 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement(float a_xInput, float a_yInput)
     {
-        Vector3 motionVector = new Vector3(a_xInput, 0, a_yInput) * Time.fixedDeltaTime * movementSpeed;
+        Vector3 forwardMotion = forwardVector * a_yInput;
+        Vector3 horizontalMotion = rightVector * a_xInput;
+        Vector3 motionVector = (forwardMotion + horizontalMotion) * movementSpeed;
         motionVector += gravity;
-        characterController.Move(motionVector);
+        characterController.Move(motionVector * Time.deltaTime);
     }
 
     void HandleFacing()

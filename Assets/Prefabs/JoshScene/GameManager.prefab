@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6993179627456919635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6993179627456919633}
+  - component: {fileID: 6993179627456919632}
+  - component: {fileID: 6993179627456919646}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6993179627456919633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993179627456919635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.0330282, y: -2.409091, z: 5.0254335}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6993179627456919632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993179627456919635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215a08e370511114480972d281abf279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  totalGameTime: 45
+  dishes:
+  - {fileID: 11400000, guid: 8ce083f6ef1872a46a4d6ce3f8c09e1b, type: 2}
+  orderTimeout: 8
+  prepBenches:
+  - {fileID: 0}
+  respawnTime: 5
+  respawnPoint: {fileID: 0}
+--- !u!114 &6993179627456919646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993179627456919635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b867cfae4360c3145b4e518a651788ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameCanvas: {fileID: 0}
+  gameOverCanvas: {fileID: 0}
+  sharePanel: {fileID: 0}
+  usernameField: {fileID: 0}
+  discordURLField: {fileID: 0}
+  scoreText: {fileID: 0}
+  itemName: {fileID: 0}
+  itemQuantity_a: {fileID: 0}
+  itemQuantity_b: {fileID: 0}
+  itemQuantity_c: {fileID: 0}
+  itemQuantity_d: {fileID: 0}
+  itemIcon_a: {fileID: 0}
+  itemIcon_b: {fileID: 0}
+  itemIcon_c: {fileID: 0}
+  itemIcon_d: {fileID: 0}
+  orderTimeSlider: {fileID: 0}
+  timerSlider: {fileID: 0}
