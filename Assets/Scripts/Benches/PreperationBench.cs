@@ -22,42 +22,42 @@ public class PreperationBench : Countertop
 
     public override void Interact(PlayerController a_player)
     {
-        playerController = a_player;
+        if(remainingIngredients.Count < 1)
+        {
+            if (a_player.IsHoldingCrockery())
+            {
+                GameObject dishObject = Instantiate(activeDish.dishPrefab, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+                DishObject dishObjComponent = dishObject.AddComponent<DishObject>();
+                dishObjComponent.dish = activeDish;
+                dishObject.name = activeDish.dishName;
+
+                if (a_player.IsHoldingItem())
+                    a_player.DiscardHeldItem();
+
+                a_player.PickupItem(dishObject);
+            }
+        }
+
 
         // Check if player is holding ingredient
-        if (playerController.IsHoldingIngredient())
+        if (a_player.IsHoldingIngredient())
         {
             // Check if player is holding desired ingredient
-            if (ContainsIngredientByName(remainingIngredients, playerController.GetHeldItem().GetComponent<IngredientObject>().ingredient.ingredientName))
+            if (ContainsIngredientByName(remainingIngredients, a_player.GetHeldItem().GetComponent<IngredientObject>().ingredient.ingredientName))
             {
                 // If so, take ingredient and remove from 'remainingIngredients'
-                RemoveIngredientByName(remainingIngredients, playerController.GetHeldItem().GetComponent<IngredientObject>().ingredient.ingredientName);
-                playerController.DiscardHeldItem();
+                RemoveIngredientByName(remainingIngredients, a_player.GetHeldItem().GetComponent<IngredientObject>().ingredient.ingredientName);
+                a_player.DiscardHeldItem();
 
                 // Check if dish is complete
                 if (remainingIngredients.Count < 1)
                 {
                     // If so, spawn DishObject on countertop
-                    CompleteAndPickupDish();
+                    activeDish = GameManager.instance.GetActiveDish();
                 }
 
             }
         }
-    }
-
-    void CompleteAndPickupDish()
-    {
-        activeDish = GameManager.instance.GetActiveDish();
-
-        GameObject dishObject = Instantiate(activeDish.dishPrefab, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-        DishObject dishObjComponent = dishObject.AddComponent<DishObject>();
-        dishObjComponent.dish = activeDish;
-        dishObject.name = activeDish.dishName;
-
-        if (playerController.IsHoldingItem())
-            playerController.DiscardHeldItem();
-
-        playerController.PickupItem(dishObject);
     }
 
     public void SelectActiveDish(Dish a_dish)

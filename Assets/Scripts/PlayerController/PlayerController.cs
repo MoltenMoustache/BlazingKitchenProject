@@ -131,6 +131,12 @@ public class PlayerController : MonoBehaviour
     {
         return heldItem != null;
     }
+    public bool IsHoldingCrockery()
+    {
+        if (IsHoldingItem())
+            return heldItem.GetComponent<CrockeryObject>() != null;
+        else return false;
+    }
     public bool IsHoldingIngredient()
     {
         if (IsHoldingItem())

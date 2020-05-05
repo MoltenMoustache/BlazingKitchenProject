@@ -8,4 +8,5 @@ public class Dish : ScriptableObject
     public string dishName;
     public List<Ingredient> ingredients = new List<Ingredient>();
     public GameObject dishPrefab;
+    public Crockery requiredCrockery;
 }
