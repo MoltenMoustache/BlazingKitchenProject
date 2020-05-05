@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18613dc5a053c1e48872cb492c122163, type: 3}
-  m_Name: EyeballStew
+  m_Name: Finger Hotdog
   m_EditorClassIdentifier: 
-  dishName: Eyeball Stew
+  dishName: Finger Hotdog
   ingredients:
-  - {fileID: 11400000, guid: abf3b39517fffd943adece35f4e2ca7d, type: 2}
-  - {fileID: 11400000, guid: abf3b39517fffd943adece35f4e2ca7d, type: 2}
-  dishPrefab: {fileID: -927199367670048503, guid: 7ffeb4d48488c164187ecbd415e26e6c,
+  - {fileID: 11400000, guid: 6a53e267d599b914aa21d7ba6b9b4324, type: 2}
+  - {fileID: 11400000, guid: e27110e5e0222274d8ab9d3ce861d59a, type: 2}
+  dishPrefab: {fileID: -927199367670048503, guid: f9a26cef9cde51549b54cb9f04626f95,
     type: 3}
