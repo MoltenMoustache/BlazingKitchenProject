@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Development Scenes/Josh_Dev.unity
-    guid: dc783fe69bd9d004388bc2670ef0b630
+    path: Assets/Scenes/MasterScene.unity
+    guid: 082bdaeca57ed1042824594cb02aee95
   m_configObjects: {}

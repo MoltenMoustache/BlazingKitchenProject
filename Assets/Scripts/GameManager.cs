@@ -36,6 +36,14 @@ public class GameManager : MonoBehaviour
     Timer respawnTimer = null;
     [SerializeField] Transform respawnPoint = null;
 
+    [Header("Sound Effects")]
+    [SerializeField] AudioClip musicClip;
+    [SerializeField] AudioClip pickupSound;
+    [SerializeField] AudioClip correctDishSound;
+    [SerializeField] AudioClip wrongDishSound;
+    Dictionary<string, AudioClip> sfxDictionary = new Dictionary<string, AudioClip>();
+    AudioSource audioSource;
+
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +57,14 @@ public class GameManager : MonoBehaviour
 
         if (uiManager != null)
             uiManager.SetMaxGameTime(totalGameTime);
+
+        // Adds SFX to dictionary
+        audioSource = GetComponent<AudioSource>();
+
+        sfxDictionary.Add("Pickup", pickupSound);
+        sfxDictionary.Add("Correct", correctDishSound);
+        sfxDictionary.Add("Incorrect", wrongDishSound);
+        sfxDictionary.Add("Music", musicClip);
     }
 
     // Update is called once per frame
@@ -60,14 +76,22 @@ public class GameManager : MonoBehaviour
         if (uiManager != null)
             uiManager.SetCurrentGameTime(timer.CurrentTimer);
 
-        if (respawnTimer != null)
-            respawnTimer.Tick(Time.deltaTime);
-
         if (dishTimer != null)
         {
             dishTimer.Tick(Time.deltaTime);
             if (uiManager != null)
                 uiManager.SetCurrentOrderTime(dishTimer.CurrentTimer);
+        }
+
+
+        if (respawnTimer != null)
+        {
+            respawnTimer.Tick(Time.deltaTime);
+            uiManager.UpdateRespawnCountdown(respawnTimer.CurrentTimer);
+        }
+        else
+        {
+            uiManager.UpdateRespawnCountdown(0.0f);
         }
     }
 
@@ -80,6 +104,7 @@ public class GameManager : MonoBehaviour
     void RespawnPlayer()
     {
         playerController.RespawnPlayer(respawnPoint.position);
+        respawnTimer = null;
     }
     #endregion Respawn
 
@@ -104,6 +129,7 @@ public class GameManager : MonoBehaviour
 
     void OrderTimeout()
     {
+        PlaySoundEffect("Incorrect");
         currentScore -= 1;
         SelectNextDish();
     }
@@ -117,6 +143,8 @@ public class GameManager : MonoBehaviour
         currentScore += (int)score;
 
         SelectNextDish();
+
+        PlaySoundEffect("Correct");
     }
 
     public Dish GetActiveDish()
@@ -131,5 +159,13 @@ public class GameManager : MonoBehaviour
 
         if (uiManager != null)
             uiManager.EndGame((int)currentScore);
+    }
+
+    public void PlaySoundEffect(string a_soundKey)
+    {
+        if (sfxDictionary.ContainsKey(a_soundKey))
+        {
+            audioSource.PlayOneShot(sfxDictionary[a_soundKey]);
+        }
     }
 }

@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Dynamic Text")]
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI respawnCountdownText;
 
     [Header("Order Card")]
     [SerializeField] TextMeshProUGUI itemName;
@@ -84,6 +85,18 @@ public class UIManager : MonoBehaviour
     }
     #endregion Buttons
 
+    public void UpdateRespawnCountdown(float a_currentTime)
+    {
+        if (a_currentTime != 0.0f)
+        {
+            respawnCountdownText.enabled = true;
+            respawnCountdownText.text = (a_currentTime + 1.0f).ToString()[0].ToString();
+        }
+        else
+            respawnCountdownText.enabled = false;
+
+    }
+
     public void EndGame(int a_score)
     {
         finalScore = a_score;
@@ -113,6 +126,11 @@ public class UIManager : MonoBehaviour
         itemQuantity_b.enabled = false;
         itemQuantity_c.enabled = false;
         itemQuantity_d.enabled = false;
+
+        itemIcon_a.enabled = false;
+        itemIcon_b.enabled = false;
+        itemIcon_c.enabled = false;
+        itemIcon_d.enabled = false;
 
         itemName.text = a_dish.dishName;
 
@@ -147,19 +165,31 @@ public class UIManager : MonoBehaviour
             {
                 case 0:
                     itemQuantity_a.enabled = true;
+                    itemIcon_a.enabled = true;
+
                     itemQuantity_a.text = ingredientCounts[ingredientKeys[i]] + "x";
+                    itemIcon_a.sprite = GetIngredientByName(ingredients, ingredientKeys[i]).ingredientIcon;
                     break;
                 case 1:
                     itemQuantity_a.enabled = true;
+                    itemIcon_b.enabled = true;
+
                     itemQuantity_b.text = ingredientCounts[ingredientKeys[i]] + "x";
+                    itemIcon_b.sprite = GetIngredientByName(ingredients, ingredientKeys[i]).ingredientIcon;
                     break;
                 case 2:
                     itemQuantity_a.enabled = true;
+                    itemIcon_c.enabled = true;
+
                     itemQuantity_c.text = ingredientCounts[ingredientKeys[i]] + "x";
+                    itemIcon_c.sprite = GetIngredientByName(ingredients, ingredientKeys[i]).ingredientIcon;
                     break;
                 case 3:
                     itemQuantity_a.enabled = true;
+                    itemIcon_d.enabled = true;
+
                     itemQuantity_d.text = ingredientCounts[ingredientKeys[i]] + "x";
+                    itemIcon_d.sprite = GetIngredientByName(ingredients, ingredientKeys[i]).ingredientIcon;
                     break;
             }
         }
@@ -176,4 +206,17 @@ public class UIManager : MonoBehaviour
         yield return webhook.Send(string.Empty, "Devil's Delights", "https://cdn.discordapp.com/attachments/706667975171768330/706714712175411250/icon.png", false, embeds);
     }
     #endregion Discord
+
+    public Ingredient GetIngredientByName(List<Ingredient> a_list, string a_ingredientName)
+    {
+        for (int i = 0; i < a_list.Count; i++)
+        {
+            if (a_list[i].ingredientName == a_ingredientName)
+            {
+                return a_list[i];
+            }
+        }
+
+        return null;
+    }
 }
