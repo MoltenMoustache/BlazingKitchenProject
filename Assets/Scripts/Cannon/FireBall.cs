@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire_Ball : MonoBehaviour
+public class FireBall : MonoBehaviour
 {
-
+    public Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody>().AddForce(transform.forward * 3);
+       // GetComponent<Rigidbody>().AddForce(transform.forward * 3);
+        rb.velocity = transform.forward * 20;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if(collision.collider.CompareTag("Player"))
         {
             Destroy(this.gameObject);
-            //KillPlayer();
-        }
+            collision.transform.GetComponent<PlayerController>().KillPlayer();
 
+        }
     }
 }
-

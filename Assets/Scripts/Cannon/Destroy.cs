@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-
-    public float lifeTime = 10f;
-    public float out_of_bounds = 20f;
-
+    public float lifeTime = 5f;
+    public float Out_of_Bounds = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,28 +20,31 @@ public class Destroy : MonoBehaviour
             lifeTime -= Time.deltaTime;
         }
 
-        if (lifeTime <= 0)
+        if(lifeTime <= 0)
         {
             Destruction();
         }
 
-        if(this.transform.position.y <= -out_of_bounds)
+        if(this.transform.position.y <= -Out_of_Bounds)
         {
             Destruction();
         }
-        
-    }
 
-    void Destruction()
-    {
-        Destroy(this.gameObject);
-    }
 
-    void OnCollisionEnter(Collision coll)
-    {
-     if(coll.gameObject.name == "Destroy")
+
+        void Destruction()
         {
-            Destruction();
+            Destroy(this.gameObject);
         }
-    }
+
+
+         void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.name == "Destroy")
+            {
+                Destruction();
+            }
+        }
+
+}
 }
