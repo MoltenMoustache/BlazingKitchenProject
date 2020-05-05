@@ -25,10 +25,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.tag = "Player";
+
         characterController = GetComponent<CharacterController>();
 
         Vector3 camRotation = Camera.main.transform.rotation.eulerAngles;
-        Camera.main.transform.rotation = Quaternion.Euler(Vector3.zero);
+        Camera.main.transform.rotation = Quaternion.Euler(new Vector3(0, camRotation.y, 0));
+
         forwardVector = Camera.main.transform.forward;
         rightVector = Camera.main.transform.right;
         Camera.main.transform.rotation = Quaternion.Euler(camRotation);

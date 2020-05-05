@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     #endregion Singleton
 
     // References
-    public PlayerController playerController;
+    [HideInInspector] public PlayerController playerController;
     UIManager uiManager;
 
     [Header("Score")]
@@ -54,7 +54,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer.Tick(Time.deltaTime);
+        if (timer != null)
+            timer.Tick(Time.deltaTime);
+
         if (uiManager != null)
             uiManager.SetCurrentGameTime(timer.CurrentTimer);
 
