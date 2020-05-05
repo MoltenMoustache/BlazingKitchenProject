@@ -18,6 +18,6 @@ public class IngredientBin : Countertop
         // Alter spawn pos?
         GameObject ingredientObject = Instantiate(ingredient.modelPrefab, transform.position + new Vector3(0, 2, 0), Quaternion.identity);
         ingredientObject.AddComponent<IngredientObject>().ingredient = ingredient;
-        GameManager.instance.playerController.PickupItem(ingredientObject);
+        a_player.PickupItem(ingredientObject);
     }
 }

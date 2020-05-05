@@ -46,14 +46,17 @@ public class GameManager : MonoBehaviour
         SelectNextDish();
 
         timer = new Timer(totalGameTime, EndGame);
-        uiManager.SetMaxGameTime(totalGameTime);
+
+        if (uiManager != null)
+            uiManager.SetMaxGameTime(totalGameTime);
     }
 
     // Update is called once per frame
     void Update()
     {
         timer.Tick(Time.deltaTime);
-        uiManager.SetCurrentGameTime(timer.CurrentTimer);
+        if (uiManager != null)
+            uiManager.SetCurrentGameTime(timer.CurrentTimer);
 
         if (respawnTimer != null)
             respawnTimer.Tick(Time.deltaTime);
@@ -61,7 +64,8 @@ public class GameManager : MonoBehaviour
         if (dishTimer != null)
         {
             dishTimer.Tick(Time.deltaTime);
-            uiManager.SetCurrentOrderTime(dishTimer.CurrentTimer);
+            if (uiManager != null)
+                uiManager.SetCurrentOrderTime(dishTimer.CurrentTimer);
         }
     }
 
@@ -92,7 +96,8 @@ public class GameManager : MonoBehaviour
 
 
         // Tell UI
-        uiManager.SetActiveDish(activeDish, orderTimeout);
+        if (uiManager != null)
+            uiManager.SetActiveDish(activeDish, orderTimeout);
     }
 
     void OrderTimeout()
@@ -122,6 +127,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over with a score of: " + currentScore);
 
-        uiManager.EndGame((int)currentScore);
+        if (uiManager != null)
+            uiManager.EndGame((int)currentScore);
     }
 }
