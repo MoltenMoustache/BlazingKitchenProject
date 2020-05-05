@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crockeryName: Bowl
   crockeryIcon: {fileID: 0}
-  modelPrefab: {fileID: 9215124187260348700, guid: 70b17e3dac7466f40aa088876ff65935,
+  modelPrefab: {fileID: -927199367670048503, guid: cf4c2ff42cf509a409cfd16eed0aeff5,
     type: 3}

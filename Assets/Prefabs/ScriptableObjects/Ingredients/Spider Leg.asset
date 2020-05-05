@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Spider Leg
   m_EditorClassIdentifier: 
   ingredientName: Spider Leg
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: 21300000, guid: 5373be73d9a0cd640a97c3bdbcdff189, type: 3}
   modelPrefab: {fileID: -927199367670048503, guid: e7bd21b31c277c14e90ff1a2543d9670,
     type: 3}

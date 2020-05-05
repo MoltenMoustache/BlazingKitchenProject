@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 951c9ae76b376e6459a8d318890ff652, type: 2}
   - {fileID: 11400000, guid: 951c9ae76b376e6459a8d318890ff652, type: 2}
   dishPrefab: {fileID: 0}
+  requiredCrockery: {fileID: 11400000, guid: 64443ca03b6324a4a96be9fab9bb96a5, type: 2}

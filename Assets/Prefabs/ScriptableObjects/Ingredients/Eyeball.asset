@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Eyeball
   m_EditorClassIdentifier: 
   ingredientName: Eyeball
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: 21300000, guid: 9636a7ad8f2a6c042a5edc1f68baf698, type: 3}
   modelPrefab: {fileID: -927199367670048503, guid: 892768af7b98ffc4e97852aef6e8885f,
     type: 3}

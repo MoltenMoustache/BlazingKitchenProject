@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Dragon Egg
   m_EditorClassIdentifier: 
   ingredientName: Dragon Egg
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: 21300000, guid: 52f0b1839ce122b408df8f4098ed939d, type: 3}
   modelPrefab: {fileID: -927199367670048503, guid: 2414a920351c05248ab7230609bab8c3,
     type: 3}

@@ -15,3 +15,4 @@ MonoBehaviour:
   dishName: Intestine Spaghetti
   ingredients: []
   dishPrefab: {fileID: 0}
+  requiredCrockery: {fileID: 11400000, guid: 64443ca03b6324a4a96be9fab9bb96a5, type: 2}

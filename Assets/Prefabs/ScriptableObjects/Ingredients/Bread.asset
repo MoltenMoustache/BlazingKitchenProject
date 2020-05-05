@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bread
   m_EditorClassIdentifier: 
   ingredientName: Bread
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: 21300000, guid: cb6e58278e84eae4fa336c3a3cf5f4cd, type: 3}
   modelPrefab: {fileID: -927199367670048503, guid: 2790753577b59a4498afcaff64700b6d,
     type: 3}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Finger
   m_EditorClassIdentifier: 
   ingredientName: Finger
-  ingredientIcon: {fileID: 0}
+  ingredientIcon: {fileID: 21300000, guid: 74c0d3570a13b7440bcc1e4e2b032f5e, type: 3}
   modelPrefab: {fileID: -927199367670048503, guid: 4047b293581c21f4194ca69b2b7bf43d,
     type: 3}
