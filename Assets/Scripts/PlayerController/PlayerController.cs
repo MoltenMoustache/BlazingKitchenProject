@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
     // Private references
     CharacterController characterController;
 
-    [SerializeField] Countertop highlightedCountertop = null;
+    Countertop highlightedCountertop = null;
     GameObject heldItem = null;
 
     [Header("Movement")]
     [SerializeField] float movementSpeed;
+    [SerializeField] Vector3 gravity;
 
     [Header("Items")]
     [SerializeField] Transform heldItemPos;
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
     void HandleMovement(float a_xInput, float a_yInput)
     {
         Vector3 motionVector = new Vector3(a_xInput, 0, a_yInput) * Time.fixedDeltaTime * movementSpeed;
-
+        motionVector += gravity;
         characterController.Move(motionVector);
     }
 
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100))
         {
-            Vector3 lookPos = new Vector3(hit.point.x, 1, hit.point.z);
+            Vector3 lookPos = new Vector3(hit.point.x, transform.position.y, hit.point.z);
             transform.LookAt(lookPos);
         }
     }
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviour
     public bool IsHoldingIngredient()
     {
         if (IsHoldingItem())
-            return heldItem.GetComponent<Ingredient>() != null;
+            return heldItem.GetComponent<IngredientObject>() != null;
         else return false;
     }
     public bool IsHoldingDish()

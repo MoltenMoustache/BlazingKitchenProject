@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dishName: Eyeball Stew
   ingredients:
-  - {fileID: 5278969462831034817, guid: fb2722c3d36147d41a75e6296abe3efa, type: 3}
-  - {fileID: 5278969462831034817, guid: fb2722c3d36147d41a75e6296abe3efa, type: 3}
+  - {fileID: 11400000, guid: abf3b39517fffd943adece35f4e2ca7d, type: 2}
+  - {fileID: 11400000, guid: abf3b39517fffd943adece35f4e2ca7d, type: 2}
   dishPrefab: {fileID: 5815371202898793631, guid: 5f720a50b6822654abb64a2cf57d0e5a,
     type: 3}

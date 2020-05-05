@@ -28,10 +28,10 @@ public class PreperationBench : Countertop
         if (playerController.IsHoldingIngredient())
         {
             // Check if player is holding desired ingredient
-            if (ContainsIngredientByName(remainingIngredients, playerController.GetHeldItem().GetComponent<Ingredient>().ingredientName))
+            if (ContainsIngredientByName(remainingIngredients, playerController.GetHeldItem().GetComponent<IngredientObject>().ingredient.ingredientName))
             {
                 // If so, take ingredient and remove from 'remainingIngredients'
-                RemoveIngredientByName(remainingIngredients, playerController.GetHeldItem().GetComponent<Ingredient>().ingredientName);
+                RemoveIngredientByName(remainingIngredients, playerController.GetHeldItem().GetComponent<IngredientObject>().ingredient.ingredientName);
                 playerController.DiscardHeldItem();
 
                 // Check if dish is complete

@@ -57,6 +57,12 @@ public class GameManager : MonoBehaviour
 
         if (respawnTimer != null)
             respawnTimer.Tick(Time.deltaTime);
+
+        if (dishTimer != null)
+        {
+            dishTimer.Tick(Time.deltaTime);
+            uiManager.SetCurrentOrderTime(dishTimer.CurrentTimer);
+        }
     }
 
     #region Respawn
@@ -76,10 +82,7 @@ public class GameManager : MonoBehaviour
     {
         activeDish = dishes[Random.Range(0, dishes.Count)];
 
-        if (dishTimer == null)
-            dishTimer = new Timer(orderTimeout, OrderTimeout);
-        else
-            dishTimer.Reset(orderTimeout);
+        dishTimer = new Timer(orderTimeout, OrderTimeout);
 
         // TEMPORARY
         for (int i = 0; i < prepBenches.Count; i++)
@@ -89,7 +92,7 @@ public class GameManager : MonoBehaviour
 
 
         // Tell UI
-        uiManager.SetActiveDish(activeDish);
+        uiManager.SetActiveDish(activeDish, orderTimeout);
     }
 
     void OrderTimeout()
@@ -100,7 +103,7 @@ public class GameManager : MonoBehaviour
 
     public void ServeDish()
     {
-        float score = dishTimer.CurrentTimer / 3.0f;
+        float score = dishTimer.CurrentTimer / 2.0f;
         if (score < 1.0f)
             score = 1.0f;
 

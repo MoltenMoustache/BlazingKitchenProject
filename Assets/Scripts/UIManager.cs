@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image itemIcon_b;
     [SerializeField] Image itemIcon_c;
     [SerializeField] Image itemIcon_d;
+    [SerializeField] Slider orderTimeSlider;
 
     [Header("Other UI")]
     [SerializeField] Slider timerSlider;
@@ -99,8 +100,15 @@ public class UIManager : MonoBehaviour
         timerSlider.value = a_currentGameTime;
     }
 
-    public void SetActiveDish(Dish a_dish)
+    public void SetCurrentOrderTime(float a_currentOrderTime)
     {
+        orderTimeSlider.value = a_currentOrderTime;
+    }
+
+    public void SetActiveDish(Dish a_dish, float a_orderTimeout = 10.0f)
+    {
+        orderTimeSlider.maxValue = a_orderTimeout;
+
         itemQuantity_a.enabled = false;
         itemQuantity_b.enabled = false;
         itemQuantity_c.enabled = false;
