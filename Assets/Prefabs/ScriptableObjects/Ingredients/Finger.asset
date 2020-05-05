@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b111c1a6d16004549b3d32f7990fb011, type: 3}
-  m_Name: Eyeball
+  m_Name: Finger
   m_EditorClassIdentifier: 
-  ingredientName: Eyeball
+  ingredientName: Finger
   ingredientIcon: {fileID: 0}
-  modelPrefab: {fileID: -927199367670048503, guid: 892768af7b98ffc4e97852aef6e8885f,
+  modelPrefab: {fileID: -927199367670048503, guid: 4047b293581c21f4194ca69b2b7bf43d,
     type: 3}

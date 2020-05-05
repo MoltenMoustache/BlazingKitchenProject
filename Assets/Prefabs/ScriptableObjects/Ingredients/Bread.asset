@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b111c1a6d16004549b3d32f7990fb011, type: 3}
-  m_Name: Eyeball
+  m_Name: Bread
   m_EditorClassIdentifier: 
-  ingredientName: Eyeball
+  ingredientName: Bread
   ingredientIcon: {fileID: 0}
-  modelPrefab: {fileID: -927199367670048503, guid: 892768af7b98ffc4e97852aef6e8885f,
+  modelPrefab: {fileID: -927199367670048503, guid: 2790753577b59a4498afcaff64700b6d,
     type: 3}
