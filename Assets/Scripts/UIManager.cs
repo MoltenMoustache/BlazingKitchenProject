@@ -22,17 +22,17 @@ public class UIManager : MonoBehaviour
 
     [Header("Dynamic Text")]
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI respawnCountdownText;
 
     [Header("Order Card")]
-    [SerializeField] TextMeshProUGUI itemName;
-    [SerializeField] TextMeshProUGUI itemQuantity_a;
-    [SerializeField] TextMeshProUGUI itemQuantity_b;
-    [SerializeField] TextMeshProUGUI itemQuantity_c;
-    [SerializeField] TextMeshProUGUI itemQuantity_d;
+    [SerializeField] TextMeshProUGUI dishName;
+    [SerializeField] Image dishIcon;
+    [SerializeField] TextMeshProUGUI ingredientName_a;
+    [SerializeField] TextMeshProUGUI ingredientName_b;
+    [SerializeField] TextMeshProUGUI crockeryName;
     [SerializeField] Image itemIcon_a;
     [SerializeField] Image itemIcon_b;
-    [SerializeField] Image itemIcon_c;
-    [SerializeField] Image itemIcon_d;
+    [SerializeField] Image crockeryIcon;
     [SerializeField] Slider orderTimeSlider;
 
     [Header("Other UI")]
@@ -84,6 +84,18 @@ public class UIManager : MonoBehaviour
     }
     #endregion Buttons
 
+    public void UpdateRespawnCountdown(float a_currentTime)
+    {
+        if (a_currentTime != 0.0f)
+        {
+            respawnCountdownText.enabled = true;
+            respawnCountdownText.text = (a_currentTime + 1.0f).ToString()[0].ToString();
+        }
+        else
+            respawnCountdownText.enabled = false;
+
+    }
+
     public void EndGame(int a_score)
     {
         finalScore = a_score;
@@ -108,61 +120,88 @@ public class UIManager : MonoBehaviour
     public void SetActiveDish(Dish a_dish, float a_orderTimeout = 10.0f)
     {
         orderTimeSlider.maxValue = a_orderTimeout;
-
-        itemQuantity_a.enabled = false;
-        itemQuantity_b.enabled = false;
-        itemQuantity_c.enabled = false;
-        itemQuantity_d.enabled = false;
-
-        itemName.text = a_dish.dishName;
+        dishName.text = a_dish.dishName;
+        dishIcon.sprite = a_dish.dishIcon;
 
 
-        List<Ingredient> ingredients = new List<Ingredient>(a_dish.ingredients);
-        List<string> ingredientKeys = new List<string>();
-        Dictionary<string, int> ingredientCounts = new Dictionary<string, int>();
-
-        for (int i = 0; i < ingredients.Count; i++)
-        {
-            // Adds ingredient keys to key list
-            if (!ingredientKeys.Contains(ingredients[i].ingredientName))
-            {
-                ingredientKeys.Add(ingredients[i].ingredientName);
-            }
-
-
-            // Adds ingredient to dictionary
-            int count;
-            if (ingredientCounts.TryGetValue(ingredients[i].ingredientName, out count))
-            {
-                ingredientCounts.Remove(ingredients[i].ingredientName);
-            }
-
-            count++;
-            ingredientCounts.Add(ingredients[i].ingredientName, count);
-        }
-
-        for (int i = 0; i < ingredientKeys.Count; i++)
+        for (int i = 0; i < a_dish.ingredients.Count; i++)
         {
             switch (i)
             {
                 case 0:
-                    itemQuantity_a.enabled = true;
-                    itemQuantity_a.text = ingredientCounts[ingredientKeys[i]] + "x";
+                    ingredientName_a.text = a_dish.ingredients[i].ingredientName;
+                    itemIcon_a.sprite = a_dish.ingredients[i].ingredientIcon;
                     break;
                 case 1:
-                    itemQuantity_a.enabled = true;
-                    itemQuantity_b.text = ingredientCounts[ingredientKeys[i]] + "x";
-                    break;
-                case 2:
-                    itemQuantity_a.enabled = true;
-                    itemQuantity_c.text = ingredientCounts[ingredientKeys[i]] + "x";
-                    break;
-                case 3:
-                    itemQuantity_a.enabled = true;
-                    itemQuantity_d.text = ingredientCounts[ingredientKeys[i]] + "x";
+                    ingredientName_b.text = a_dish.ingredients[i].ingredientName;
+                    itemIcon_b.sprite = a_dish.ingredients[i].ingredientIcon;
                     break;
             }
         }
+
+        crockeryName.text = a_dish.requiredCrockery.crockeryName;
+        crockeryIcon.sprite = a_dish.requiredCrockery.crockeryIcon;
+
+
+
+        //List<Ingredient> ingredients = new List<Ingredient>(a_dish.ingredients);
+        //List<string> ingredientKeys = new List<string>();
+        //Dictionary<string, int> ingredientCounts = new Dictionary<string, int>();
+
+        //for (int i = 0; i < ingredients.Count; i++)
+        //{
+        //    // Adds ingredient keys to key list
+        //    if (!ingredientKeys.Contains(ingredients[i].ingredientName))
+        //    {
+        //        ingredientKeys.Add(ingredients[i].ingredientName);
+        //    }
+
+
+        //    // Adds ingredient to dictionary
+        //    int count;
+        //    if (ingredientCounts.TryGetValue(ingredients[i].ingredientName, out count))
+        //    {
+        //        ingredientCounts.Remove(ingredients[i].ingredientName);
+        //    }
+
+        //    count++;
+        //    ingredientCounts.Add(ingredients[i].ingredientName, count);
+        //}
+
+        //for (int i = 0; i < ingredientKeys.Count; i++)
+        //{
+        //    switch (i)
+        //    {
+        //        case 0:
+        //            itemQuantity_a.enabled = true;
+        //            itemIcon_a.enabled = true;
+
+        //            itemQuantity_a.text = ingredientCounts[ingredientKeys[i]] + "x";
+        //            itemIcon_a.sprite = GetIngredientByName(ingredients, ingredientKeys[i]).ingredientIcon;
+        //            break;
+        //        case 1:
+        //            itemQuantity_a.enabled = true;
+        //            itemIcon_b.enabled = true;
+
+        //            itemQuantity_b.text = ingredientCounts[ingredientKeys[i]] + "x";
+        //            itemIcon_b.sprite = GetIngredientByName(ingredients, ingredientKeys[i]).ingredientIcon;
+        //            break;
+        //        case 2:
+        //            itemQuantity_a.enabled = true;
+        //            itemIcon_c.enabled = true;
+
+        //            itemQuantity_c.text = ingredientCounts[ingredientKeys[i]] + "x";
+        //            itemIcon_c.sprite = GetIngredientByName(ingredients, ingredientKeys[i]).ingredientIcon;
+        //            break;
+        //        case 3:
+        //            itemQuantity_a.enabled = true;
+        //            itemIcon_d.enabled = true;
+
+        //            itemQuantity_d.text = ingredientCounts[ingredientKeys[i]] + "x";
+        //            itemIcon_d.sprite = GetIngredientByName(ingredients, ingredientKeys[i]).ingredientIcon;
+        //            break;
+        //    }
+        //}
     }
 
     #region Discord
@@ -176,4 +215,17 @@ public class UIManager : MonoBehaviour
         yield return webhook.Send(string.Empty, "Devil's Delights", "https://cdn.discordapp.com/attachments/706667975171768330/706714712175411250/icon.png", false, embeds);
     }
     #endregion Discord
+
+    public Ingredient GetIngredientByName(List<Ingredient> a_list, string a_ingredientName)
+    {
+        for (int i = 0; i < a_list.Count; i++)
+        {
+            if (a_list[i].ingredientName == a_ingredientName)
+            {
+                return a_list[i];
+            }
+        }
+
+        return null;
+    }
 }

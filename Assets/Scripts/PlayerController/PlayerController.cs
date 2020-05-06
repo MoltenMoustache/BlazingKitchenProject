@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float movementSpeed;
     [SerializeField] Vector3 gravity;
+    [SerializeField] LayerMask groundLayer;
     Vector3 forwardVector;
     Vector3 rightVector;
 
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 100, groundLayer))
         {
             Vector3 lookPos = new Vector3(hit.point.x, transform.position.y, hit.point.z);
             transform.LookAt(lookPos);
@@ -113,6 +114,8 @@ public class PlayerController : MonoBehaviour
         heldItem = a_item;
         heldItem.transform.parent = heldItemPos;
         heldItem.transform.position = heldItemPos.position;
+
+        GameManager.instance.PlaySoundEffect("Pickup");
     }
 
     public void DiscardHeldItem()

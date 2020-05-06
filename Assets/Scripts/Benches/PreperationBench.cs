@@ -22,7 +22,7 @@ public class PreperationBench : Countertop
 
     public override void Interact(PlayerController a_player)
     {
-        if(remainingIngredients.Count < 1)
+        if (remainingIngredients.Count < 1)
         {
             if (a_player.IsHoldingCrockery())
             {
@@ -106,4 +106,6 @@ public class PreperationBench : Countertop
         else
             Debug.Log("Ingredient not in list");
     }
+
+    
 }
