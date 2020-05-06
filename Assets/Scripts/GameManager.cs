@@ -137,17 +137,24 @@ public class GameManager : MonoBehaviour
         SelectNextDish();
     }
 
-    public void ServeDish()
+    public void ServeDish(Dish a_dish)
     {
-        float score = dishTimer.CurrentTimer / 2.0f;
-        if (score < 1.0f)
-            score = 1.0f;
+        if (a_dish.dishName == activeDish.dishName)
+        {
+            float score = dishTimer.CurrentTimer / 2.0f;
+            if (score < 1.0f)
+                score = 1.0f;
 
-        currentScore += (int)score;
+            currentScore += (int)score;
 
-        SelectNextDish();
+            SelectNextDish();
 
-        PlaySoundEffect("Correct");
+            PlaySoundEffect("Correct");
+        }
+        else
+        {
+            OrderTimeout();
+        }
     }
 
     public Dish GetActiveDish()
