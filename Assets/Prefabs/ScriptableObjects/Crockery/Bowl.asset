@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bowl
   m_EditorClassIdentifier: 
   crockeryName: Bowl
-  crockeryIcon: {fileID: 0}
+  crockeryIcon: {fileID: 21300000, guid: dd8bd8d1ded45ac45b8ee98de7daae53, type: 3}
   modelPrefab: {fileID: -927199367670048503, guid: cf4c2ff42cf509a409cfd16eed0aeff5,
     type: 3}

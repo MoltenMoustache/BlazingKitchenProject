@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Devilled Egg
   m_EditorClassIdentifier: 
   dishName: Devilled Egg
+  dishIcon: {fileID: 21300000, guid: 75a9ba3e6b3afb142aab9f9f030e361b, type: 3}
   ingredients:
   - {fileID: 11400000, guid: e98ad0705c440644a976e9c20d5cca4f, type: 2}
   - {fileID: 11400000, guid: e98ad0705c440644a976e9c20d5cca4f, type: 2}

@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
 
     public void ExitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
     public void RestartGame()

@@ -18,7 +18,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftFoot' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -26,14 +27,43 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -76,7 +106,57 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: CharIdle(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: MainChar
+      parentName: CharIdle(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Main
+      parentName: CharIdle(Clone)
+      position: {x: -0.004085456, y: 0.38949242, z: 0}
+      rotation: {x: 1.5512881e-11, y: -4.224285e-12, z: 0.49647754, w: 0.86804956}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: LLeg
+      parentName: Main
+      position: {x: -0.23948228, y: -7.105427e-17, z: 0}
+      rotation: {x: 1.28584e-11, y: 2.0816024e-11, z: 0.20227894, w: 0.979328}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1}
+    - name: LShoulder
+      parentName: Main
+      position: {x: 0.087912776, y: 0.19540277, z: -1.4704828e-33}
+      rotation: {x: 1.1415595e-11, y: 1.5480624e-11, z: 0.088314086, w: 0.9960927}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: LArm
+      parentName: LShoulder
+      position: {x: -0.1994632, y: -0.016439693, z: -1.1028622e-33}
+      rotation: {x: -0, y: -0, z: -4.201215e-23, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: Head
+      parentName: Main
+      position: {x: 0.463204, y: 0.2705145, z: -2.3665827e-32}
+      rotation: {x: -1.5503243e-11, y: 4.218773e-12, z: -0.49647754, w: 0.86804956}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: RShoulder
+      parentName: Main
+      position: {x: 0.21350263, y: -0.0180992, z: 0}
+      rotation: {x: 0.42891848, y: -0.9033432, z: -0.000000011658941, w: 0.0000000055610228}
+      scale: {x: 1.0000001, y: 1.0000011, z: 1.0000011}
+    - name: RArm
+      parentName: RShoulder
+      position: {x: 0.19946435, y: 0.016439913, z: 4.2430706e-10}
+      rotation: {x: 0.000000014904343, y: -3.330669e-16, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1.000001, z: 1.0000005}
+    - name: RLeg
+      parentName: Main
+      position: {x: -0.11635547, y: -0.20931646, z: -1.5777218e-32}
+      rotation: {x: 0.32218784, y: -0.9466758, z: -1.4425305e-11, w: 2.1751014e-11}
+      scale: {x: 0.9999999, y: 0.9999997, z: 0.9999998}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -87,7 +167,7 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2

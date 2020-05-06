@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EyeballStew
   m_EditorClassIdentifier: 
   dishName: Eyeball Stew
+  dishIcon: {fileID: 21300000, guid: 066a3e41c15daa749a86ee15bdefa6cb, type: 3}
   ingredients:
   - {fileID: 11400000, guid: abf3b39517fffd943adece35f4e2ca7d, type: 2}
   - {fileID: 11400000, guid: abf3b39517fffd943adece35f4e2ca7d, type: 2}

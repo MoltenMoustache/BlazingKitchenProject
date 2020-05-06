@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     // Private references
     CharacterController characterController;
+    Animator animator;
+    Timer animationTimer = null;
 
     Countertop highlightedCountertop = null;
     GameObject heldItem = null;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         transform.tag = "Player";
 
         characterController = GetComponent<CharacterController>();
@@ -46,8 +49,6 @@ public class PlayerController : MonoBehaviour
 
         HandleInteraction();
 
-
-
         #region Debug
         if (Input.GetKeyDown(KeyCode.K))
             KillPlayer();
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement(float a_xInput, float a_yInput)
     {
+        animator.SetBool("isWalking", (a_xInput != 0.0f || a_yInput != 0.0f));
+
         Vector3 forwardMotion = forwardVector * a_yInput;
         Vector3 horizontalMotion = rightVector * a_xInput;
         Vector3 motionVector = (forwardMotion + horizontalMotion) * movementSpeed;

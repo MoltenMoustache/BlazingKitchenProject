@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Finger Hotdog
   m_EditorClassIdentifier: 
   dishName: Finger Hotdog
+  dishIcon: {fileID: 21300000, guid: cb6e58278e84eae4fa336c3a3cf5f4cd, type: 3}
   ingredients:
   - {fileID: 11400000, guid: 6a53e267d599b914aa21d7ba6b9b4324, type: 2}
   - {fileID: 11400000, guid: e27110e5e0222274d8ab9d3ce861d59a, type: 2}
