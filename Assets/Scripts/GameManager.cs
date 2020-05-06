@@ -71,10 +71,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (timer != null)
+        {
             timer.Tick(Time.deltaTime);
-
-        if (uiManager != null)
-            uiManager.SetCurrentGameTime(timer.CurrentTimer);
+            if (uiManager != null)
+                uiManager.SetCurrentGameTime(timer.CurrentTimer);
+        }
 
         if (dishTimer != null)
         {
@@ -87,11 +88,13 @@ public class GameManager : MonoBehaviour
         if (respawnTimer != null)
         {
             respawnTimer.Tick(Time.deltaTime);
-            uiManager.UpdateRespawnCountdown(respawnTimer.CurrentTimer);
+            if (uiManager != null)
+                uiManager.UpdateRespawnCountdown(respawnTimer.CurrentTimer);
         }
         else
         {
-            uiManager.UpdateRespawnCountdown(0.0f);
+            if (uiManager != null)
+                uiManager.UpdateRespawnCountdown(0.0f);
         }
     }
 

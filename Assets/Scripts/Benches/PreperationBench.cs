@@ -5,7 +5,10 @@ using UnityEngine;
 public class PreperationBench : Countertop
 {
     Dish activeDish = null;
-    [SerializeField] List<Ingredient> remainingIngredients = new List<Ingredient>();
+    [SerializeField] Transform ingredientPlacement_a;
+    [SerializeField] Transform ingredientPlacement_b;
+    List<Ingredient> totalIngredients = new List<Ingredient>();
+    List<Ingredient> remainingIngredients = new List<Ingredient>();
 
     PlayerController playerController;
 
@@ -18,6 +21,15 @@ public class PreperationBench : Countertop
     void Update()
     {
 
+    }
+
+    void ClearBench()
+    {
+        // Clear bench
+        if (ingredientPlacement_a.childCount > 0)
+            Destroy(ingredientPlacement_a.GetChild(0).gameObject);
+        if (ingredientPlacement_b.childCount > 0)
+            Destroy(ingredientPlacement_b.GetChild(0).gameObject);
     }
 
     public override void Interact(PlayerController a_player)
@@ -35,6 +47,8 @@ public class PreperationBench : Countertop
                     a_player.DiscardHeldItem();
 
                 a_player.PickupItem(dishObject);
+                ClearBench();
+                remainingIngredients = new List<Ingredient>(totalIngredients);
             }
         }
 
@@ -45,8 +59,28 @@ public class PreperationBench : Countertop
             // Check if player is holding desired ingredient
             if (ContainsIngredientByName(remainingIngredients, a_player.GetHeldItem().GetComponent<IngredientObject>().ingredient.ingredientName))
             {
+
+                // Places ingredient on bench
+
+                Transform placementPosition = null;
+                if (remainingIngredients.Count == 2)
+                {
+                    placementPosition = ingredientPlacement_a;
+                }
+                else if (remainingIngredients.Count == 1)
+                {
+                    placementPosition = ingredientPlacement_b;
+                }
+
+
+                GameObject ingredientObject = Instantiate(a_player.GetHeldItem(), placementPosition.position, Quaternion.identity);
+                ingredientObject.transform.localScale = a_player.GetHeldItem().transform.localScale;
+                ingredientObject.transform.parent = placementPosition;
+
+
                 // If so, take ingredient and remove from 'remainingIngredients'
                 RemoveIngredientByName(remainingIngredients, a_player.GetHeldItem().GetComponent<IngredientObject>().ingredient.ingredientName);
+
                 a_player.DiscardHeldItem();
 
                 // Check if dish is complete
@@ -63,7 +97,9 @@ public class PreperationBench : Countertop
     public void SelectActiveDish(Dish a_dish)
     {
         // Clones the ingredients list of 'a_dish'
+        totalIngredients = new List<Ingredient>(a_dish.ingredients);
         remainingIngredients = new List<Ingredient>(a_dish.ingredients);
+        ClearBench();
     }
 
 
@@ -107,5 +143,5 @@ public class PreperationBench : Countertop
             Debug.Log("Ingredient not in list");
     }
 
-    
+
 }
